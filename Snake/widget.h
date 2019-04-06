@@ -28,6 +28,9 @@ public:
 public:
     void init();
     void step(Action action);
+    const SnakeGame::SnakeGrid &getObservation();
+    bool isSnakeGameOver();
+
 
 private slots:
     void repaint();

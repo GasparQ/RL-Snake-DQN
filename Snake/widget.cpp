@@ -27,7 +27,7 @@ void SnakeWidget::init()
     m_layout.addWidget(&m_label);
     setLayout(&m_layout);
 
-    m_game.initGame(60, 60);
+    m_game.initGame(20, 20);
 }
 
 void SnakeWidget::step(Action action)
@@ -90,4 +90,12 @@ void SnakeWidget::keyPressEvent(QKeyEvent *event)
         step(Action::NONE);
         break;
     }
+}
+
+const SnakeGame::SnakeGrid &SnakeWidget::getObservation() {
+    return m_game.getGrid();
+}
+
+bool SnakeWidget::isSnakeGameOver() {
+    return m_game.isOver();
 }
