@@ -26,10 +26,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        widget.cpp
+        widget.cpp \
+    snakegame.cpp
 
 HEADERS += \
-        widget.h
+        widget.h \
+    snakegame.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
