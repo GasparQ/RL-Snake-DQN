@@ -106,3 +106,5 @@ venv.bak/
 build-Snake-Desktop_Qt_5_12_2_MSVC2017_64bit-Debug/
 
 build-Snake-Desktop_Qt_5_12_2_MSVC2017_64bit-Release/
+
+\.idea/

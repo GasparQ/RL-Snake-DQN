@@ -24,7 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
-INCLUDEPATH += C:/Users/Victor/Anaconda3/envs/GYM_ENV/include
+ANACONDAPATH = F:/Anaconda/envs/dl3
+#ANACONDAPATH = C:/Users/Victor/Anaconda3/envs/GYM_ENV
+
+INCLUDEPATH += $${ANACONDAPATH}/include
 
 SOURCES += \
         main.cpp \
@@ -35,9 +38,9 @@ HEADERS += \
         widget.h \
     snakegame.h
 
-LIBS += -L C:/Users/Victor/Anaconda3/envs/GYM_ENV/libs -lpython36
+LIBS += -L"$${ANACONDAPATH}/libs" -lpython36
 
-DEPENDPATH += C:/Users/Victor/Anaconda3/envs/GYM_ENV/
+DEPENDPATH += $${ANACONDAPATH}/
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
