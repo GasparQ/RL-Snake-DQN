@@ -33,6 +33,9 @@ private slots:
     void repaint();
 
 private:
+    void keyPressEvent(QKeyEvent *event);
+
+private:
     QHBoxLayout m_layout;
     QLabel m_label;
     QImage m_image;
