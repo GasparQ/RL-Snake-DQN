@@ -3,10 +3,10 @@
 #include "snakegame.h"
 
 const std::unordered_map<SnakeGame::Direction, SnakeGame::Vector> SnakeGame::Directions = {
-    { SnakeGame::Direction::UP, { -1, 0 } },
-    { SnakeGame::Direction::DOWN, { 1, 0 } },
-    { SnakeGame::Direction::LEFT, { 0, -1 } },
-    { SnakeGame::Direction::RIGHT, { 0, 1 } }
+    { SnakeGame::Direction::UP, { 0, -1 } },
+    { SnakeGame::Direction::DOWN, { 0, 1 } },
+    { SnakeGame::Direction::LEFT, { -1, 0 } },
+    { SnakeGame::Direction::RIGHT, { 1, 0 } }
 };
 
 SnakeGame::SnakeGame()
@@ -21,6 +21,7 @@ void SnakeGame::initGame(size_t width, size_t height)
     m_grid.assign(width * height, CellType::EMPTY);
     m_width = width;
     m_height = height;
+    m_isOver = false;
 
     //write walls
     for (size_t x = 0; x < width; x++) {
@@ -36,15 +37,12 @@ void SnakeGame::initGame(size_t width, size_t height)
     //setup snake
     m_snakeSize = 3;
     setSnakeDirection(Directions.at(Direction::RIGHT));
-    m_snakeBody.push_back(Position {
-                              (width - m_snakeSize) / 2,
-                              height / 2
-                          });
-    for (size_t i = 0; i < m_snakeSize - 1; i++) {
-        m_snakeBody.push_back(Position {
-                                  m_snakeBody.back().x + 1,
-                                  m_snakeBody.back().y
-                              });
+    Position bodyPosition { (width - m_snakeSize) / 2, height / 2 };
+
+    for (size_t i = 0; i < m_snakeSize; i++) {
+        m_snakeBody.push_front(bodyPosition);
+        bodyPosition.x += m_snakeDirection.x;
+        bodyPosition.y += m_snakeDirection.y;
     }
     m_snakeHead = &m_snakeBody.front();
     m_snakeTail = &m_snakeBody.back();
@@ -74,6 +72,7 @@ void SnakeGame::updateGrid()
         break;
     case CellType::SNAKE:
     case CellType::WALL:
+        m_isOver = true;
         emit gameOver(m_snakeSize);
         break;
     default:
@@ -110,6 +109,11 @@ size_t SnakeGame::getWidth() const
 size_t SnakeGame::getHeight() const
 {
     return m_height;
+}
+
+bool SnakeGame::isOver() const
+{
+    return m_isOver;
 }
 
 void SnakeGame::setCellValue(size_t x, size_t y, SnakeGame::CellType value)

@@ -53,6 +53,7 @@ public:
     const SnakeGrid &getGrid() const;
     size_t getWidth() const;
     size_t getHeight() const;
+    bool isOver() const;
 
 private:
     void setCellValue(size_t x, size_t y, CellType value);
@@ -71,6 +72,7 @@ private:
     SnakeGrid    m_grid;
     size_t  m_width;
     size_t  m_height;
+    bool m_isOver;
 
 private:
     Position *m_snakeHead;

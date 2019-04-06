@@ -1,5 +1,6 @@
 #include <QObject>
 #include <QPainter>
+#include <QKeyEvent>
 
 #include <QDebug>
 
@@ -68,4 +69,25 @@ void SnakeWidget::repaint()
     }
 
     m_label.setPixmap(QPixmap::fromImage(m_image));
+}
+
+void SnakeWidget::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+    case Qt::Key_Up:
+        step(Action::UP);
+        break;
+    case Qt::Key_Down:
+        step(Action::DOWN);
+        break;
+    case Qt::Key_Left:
+        step(Action::LEFT);
+        break;
+    case Qt::Key_Right:
+        step(Action::RIGHT);
+        break;
+    default:
+        step(Action::NONE);
+        break;
+    }
 }
