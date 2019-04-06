@@ -63,8 +63,8 @@ private:
     void randomizeApple();
 
 signals:
-    void gridUpdated(SnakeGrid const &grid);
-    void gameStarted(SnakeGrid const &grid);
+    void gridUpdated();
+    void gameStarted();
     void gameOver(size_t score);
 
 private:

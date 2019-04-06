@@ -37,10 +37,10 @@ void SnakeGame::initGame(size_t width, size_t height)
     m_snakeSize = 3;
     setSnakeDirection(Directions.at(Direction::RIGHT));
     m_snakeBody.push_back(Position {
-                              (width + m_snakeSize) / 2,
+                              (width - m_snakeSize) / 2,
                               height / 2
                           });
-    for (size_t i = 0; i < m_snakeSize; i++) {
+    for (size_t i = 0; i < m_snakeSize - 1; i++) {
         m_snakeBody.push_back(Position {
                                   m_snakeBody.back().x + 1,
                                   m_snakeBody.back().y
@@ -55,7 +55,7 @@ void SnakeGame::initGame(size_t width, size_t height)
 
     randomizeApple();
 
-    emit gameStarted(m_grid);
+    emit gameStarted();
 }
 
 void SnakeGame::updateGrid()
@@ -83,7 +83,7 @@ void SnakeGame::updateGrid()
         break;
     }
 
-    emit gridUpdated(m_grid);
+    emit gridUpdated();
 }
 
 void SnakeGame::setSnakeDirection(SnakeGame::Direction direction)
@@ -145,7 +145,7 @@ void SnakeGame::randomizeApple()
 {
     for(;;)
     {
-        size_t i = m_width * m_height * QRandomGenerator::global()->generate();
+        size_t i = m_width * m_height * QRandomGenerator::global()->generateDouble() - 1;
 
         if (m_grid[i] == CellType::EMPTY) {
             setCellValue(i, CellType::APPLE);
