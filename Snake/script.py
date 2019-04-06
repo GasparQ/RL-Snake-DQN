@@ -1,4 +1,12 @@
-import spam
+import pySnake
+import time
 
-spam.system(1)
-print('FAUX')
+pySnake.make('monGrosSNAKE')
+pySnake.reset()
+
+done = False
+while not done:
+    time.sleep(0.5)
+    obs, reward, done = pySnake.step(1)
+    print(obs, reward, done)
+    pass
